@@ -1,0 +1,2258 @@
+<!DOCTYPE html><html lang="zh"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EMOSAF S.A. — 非洲电动出行的工业体系构建者</title>
+  <meta name="description" content="EMOSAF S.A.通过优化的半散件组装、区域关税导航和分散式太阳能基础设施，在中非推广可持续交通。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700;800&amp;family=Barlow:wght@300;400;500;600&amp;family=Share+Tech+Mono&amp;display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='6' fill='%230a0f0a'/><polygon points='32,4 60,20 60,44 32,60 4,44 4,20' fill='none' stroke='%2300e87a' stroke-width='3'/><text x='32' y='40' font-family='Arial Black' font-size='18' font-weight='900' fill='%2300e87a' text-anchor='middle'>E</text></svg>">
+  <style>
+    :root {
+      --black: #080c08;
+      --dark: #0e130e;
+      --slate: #141c14;
+      --mid: #1e2a1e;
+      --border: rgba(0, 232, 120, 0.15);
+      --green: #00e87a;
+      --green-dim: #00c264;
+      --green-faint: rgba(0, 232, 120, 0.07);
+      --white: #f4f6f0;
+      --off: #a8b4a4;
+      --text: #d4ddd0;
+      --mono: 'Share Tech Mono', monospace;
+      --condensed: 'Barlow Condensed', sans-serif;
+      --body: 'Barlow', sans-serif;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--black);
+      color: var(--text);
+      font-family: var(--body);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── SCROLL PROGRESS ── */
+    #scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      width: 0%;
+      background: var(--green);
+      z-index: 200;
+      transition: width .1s linear;
+      box-shadow: 0 0 8px rgba(0, 232, 120, 0.6);
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 2px;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5vw;
+      height: 68px;
+      background: rgba(8, 12, 8, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: background .3s;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      border: 1.5px solid var(--green);
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-text {
+      font-family: var(--condensed);
+      font-weight: 800;
+      font-size: 21px;
+      letter-spacing: .12em;
+      color: var(--white);
+    }
+
+    .logo-text span {
+      color: var(--green);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--condensed);
+      font-weight: 500;
+      font-size: 13px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--off);
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--green);
+    }
+
+    .lang-btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--off);
+      font-family: var(--condensed);
+      font-size: 12px;
+      letter-spacing: .08em;
+      padding: 4px 9px;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all .2s;
+    }
+
+    .lang-btn:hover,
+    .lang-btn.active {
+      border-color: var(--green);
+      color: var(--green);
+      background: var(--green-faint);
+    }
+
+    .nav-cta {
+      background: var(--green);
+      color: var(--black) !important;
+      font-family: var(--condensed);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 9px 20px;
+      border-radius: 2px;
+      transition: all .2s;
+      white-space: nowrap;
+    }
+
+    .nav-cta:hover {
+      background: #00ff88;
+      transform: translateY(-1px);
+    }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: var(--white);
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 70px;
+      left: 0;
+      right: 0;
+      z-index: 99;
+      background: rgba(8, 12, 8, 0.98);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 5vw;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .mobile-menu.open {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      font-family: var(--condensed);
+      font-size: 18px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--off);
+      text-decoration: none;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      transition: color .2s;
+    }
+
+    .mobile-menu a:hover {
+      color: var(--green);
+    }
+
+    .mobile-lang {
+      display: flex;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background: var(--black);
+      padding-top: 68px;
+    }
+
+    .hero-bg-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0.38;
+      filter: saturate(0.55) brightness(0.85);
+      pointer-events: none;
+    }
+
+    .hero-bg-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(100deg, rgba(8, 12, 8, 0.95) 0%, rgba(8, 12, 8, 0.80) 45%, rgba(8, 12, 8, 0.40) 100%);
+      pointer-events: none;
+    }
+
+    .hero-grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(0, 232, 120, .04) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 232, 120, .04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, .6) 20%, rgba(0, 0, 0, .6) 80%, transparent 100%);
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(0, 232, 120, .08) 0%, transparent 70%);
+      top: 10%;
+      right: 5%;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 5vw;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--green);
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 36px;
+      height: 1px;
+      background: var(--green);
+    }
+
+    h1 {
+      font-family: var(--condensed);
+      font-weight: 800;
+      font-size: clamp(42px, 6vw, 76px);
+      line-height: 1.0;
+      letter-spacing: -.01em;
+      color: var(--white);
+      margin-bottom: 22px;
+      text-transform: uppercase;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: var(--green);
+    }
+
+    .hero-sub {
+      font-size: 16px;
+      color: var(--off);
+      line-height: 1.75;
+      max-width: 530px;
+      margin-bottom: 36px;
+      font-weight: 300;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--green);
+      color: var(--black);
+      font-family: var(--condensed);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 13px 26px;
+      border-radius: 2px;
+      transition: all .2s;
+    }
+
+    .btn-primary:hover {
+      background: #00ff88;
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: none;
+      color: var(--white);
+      font-family: var(--condensed);
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 12px 22px;
+      border: 1px solid rgba(255, 255, 255, .2);
+      border-radius: 2px;
+      transition: all .2s;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    /* ── HERO IMAGE PANEL (right side) ── */
+    .hero-img-panel {
+      position: relative;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 232, 120, 0.25);
+      box-shadow: 0 0 40px rgba(0, 232, 120, 0.08);
+    }
+
+    .hero-img-panel img {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      filter: saturate(0.8) brightness(0.9);
+      transition: filter .4s ease;
+    }
+
+    .hero-img-panel:hover img {
+      filter: saturate(1) brightness(1);
+    }
+
+    .hero-img-panel-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(8, 12, 8, 0.1) 0%, rgba(8, 12, 8, 0.55) 100%);
+      pointer-events: none;
+    }
+
+    .hero-panel {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(8, 12, 8, 0.88);
+      border-top: 1px solid var(--border);
+      padding: 20px 24px;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-panel-header {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--green);
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: .3;
+      }
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 8px 12px;
+      border-bottom: 1px solid rgba(0, 232, 120, .08);
+      border-right: 1px solid rgba(0, 232, 120, .08);
+    }
+
+    .stat-row:nth-child(even) {
+      border-right: none;
+    }
+
+    .stat-row:nth-last-child(-n+2) {
+      border-bottom: none;
+    }
+
+    .stat-label {
+      font-family: var(--condensed);
+      font-size: 11px;
+      letter-spacing: .05em;
+      color: var(--off);
+      text-transform: uppercase;
+    }
+
+    .stat-value {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--white);
+    }
+
+    .stat-value.green {
+      color: var(--green);
+    }
+
+    /* ── TICKER ── */
+    .ticker {
+      background: var(--slate);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .ticker-track {
+      display: inline-flex;
+      gap: 0;
+      animation: ticker-scroll 40s linear infinite;
+    }
+
+    .ticker-item {
+      font-family: var(--condensed);
+      font-size: 13px;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--off);
+      display: flex;
+      align-items: center;
+      gap: 0;
+      padding: 0 32px;
+    }
+
+    .ticker-divider {
+      color: var(--green);
+      font-size: 18px;
+      margin: 0 4px;
+      opacity: 0.6;
+    }
+
+    .ticker-item .ticker-tag {
+      color: var(--green);
+      font-weight: 600;
+    }
+
+    @keyframes ticker-scroll {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 100px 5vw;
+    }
+
+    .section-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--green);
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 26px;
+      height: 1px;
+      background: var(--green);
+    }
+
+    h2 {
+      font-family: var(--condensed);
+      font-weight: 700;
+      font-size: clamp(30px, 4vw, 52px);
+      color: var(--white);
+      text-transform: uppercase;
+      letter-spacing: .02em;
+      line-height: 1.1;
+      margin-bottom: 18px;
+    }
+
+    h2 em {
+      font-style: normal;
+      color: var(--green);
+    }
+
+    .section-desc {
+      font-size: 16px;
+      color: var(--off);
+      line-height: 1.8;
+      max-width: 600px;
+      font-weight: 300;
+    }
+
+    /* ── OVERVIEW ── */
+    #overview {
+      background: var(--dark);
+    }
+
+    .overview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: start;
+      margin-top: 56px;
+    }
+
+    .overview-text p {
+      font-size: 16px;
+      color: var(--off);
+      line-height: 1.85;
+      font-weight: 300;
+      margin-bottom: 14px;
+    }
+
+    .overview-text p strong {
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 28px;
+    }
+
+    .kpi-cell {
+      background: var(--slate);
+      padding: 28px 22px;
+      text-align: center;
+      transition: background .2s;
+    }
+
+    .kpi-cell:hover {
+      background: var(--mid);
+    }
+
+    .kpi-num {
+      font-family: var(--condensed);
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--green);
+      line-height: 1;
+      margin-bottom: 6px;
+      transition: transform .3s;
+    }
+
+    .kpi-cell:hover .kpi-num {
+      transform: scale(1.06);
+    }
+
+    .kpi-desc {
+      font-family: var(--condensed);
+      font-size: 12px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--off);
+    }
+
+    .overview-image-wrap {
+      position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      margin-bottom: 28px;
+    }
+
+    .overview-image-wrap img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      filter: saturate(0.8) brightness(0.9);
+      transition: filter .4s ease, transform .5s ease;
+    }
+
+    .overview-image-wrap:hover img {
+      filter: saturate(1) brightness(1);
+      transform: scale(1.02);
+    }
+
+    .overview-image-wrap::after {
+      content: 'KRIBI PORT INDUSTRIAL ZONE — CAMEROON';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 12px 16px;
+      background: linear-gradient(transparent, rgba(8, 12, 8, 0.88));
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: .18em;
+      color: var(--green);
+    }
+
+    /* ── PILLARS ── */
+    #pillars {
+      background: var(--black);
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .pillar {
+      background: var(--dark);
+      padding: 0;
+      position: relative;
+      transition: background .3s;
+      overflow: hidden;
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pillar:hover {
+      background: var(--slate);
+    }
+
+    .pillar-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0.35;
+      filter: saturate(0.6) brightness(0.7);
+      transition: opacity .5s ease, filter .5s ease, transform .6s ease;
+      pointer-events: none;
+    }
+
+    .pillar:hover .pillar-img {
+      opacity: 0.7;
+      filter: saturate(0.85) brightness(0.8);
+      transform: scale(1.04);
+    }
+
+    .pillar-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(14, 19, 14, 0.3) 0%, rgba(8, 12, 8, 0.82) 55%, rgba(8, 12, 8, 0.96) 100%);
+      opacity: 1;
+      pointer-events: none;
+    }
+
+    .pillar-content {
+      position: relative;
+      z-index: 2;
+      padding: 38px 30px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      justify-content: flex-end;
+      flex: 1;
+    }
+
+    .pillar-num {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--green);
+      letter-spacing: .15em;
+      margin-bottom: auto;
+      padding-top: 0;
+    }
+
+    .pillar-icon {
+      width: 46px;
+      height: 46px;
+      margin-bottom: 18px;
+      margin-top: 20px;
+    }
+
+    .pillar-icon svg {
+      width: 100%;
+      height: 100%;
+      stroke: var(--green);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    h3 {
+      font-family: var(--condensed);
+      font-weight: 700;
+      font-size: 21px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    .pillar p {
+      font-size: 14px;
+      color: var(--off);
+      line-height: 1.75;
+      font-weight: 300;
+    }
+
+    .pillar-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      width: 0;
+      background: var(--green);
+      transition: width .4s ease;
+      z-index: 3;
+    }
+
+    .pillar:hover .pillar-bar {
+      width: 100%;
+    }
+
+    /* ── CINEMATIC BANNER (between pillars & markets) ── */
+    .cinematic-banner {
+      position: relative;
+      height: 340px;
+      overflow: hidden;
+    }
+
+    .cinematic-banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+      display: block;
+      filter: saturate(0.7) brightness(0.75);
+    }
+
+    .cinematic-banner-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(8, 12, 8, 0.9) 0%, rgba(8, 12, 8, 0.5) 50%, rgba(8, 12, 8, 0.2) 100%);
+    }
+
+    .cinematic-banner-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      padding: 0 8vw;
+      max-width: 1280px;
+      margin: 0 auto;
+      left: 0;
+      right: 0;
+    }
+
+    .cinematic-banner-text {
+      max-width: 560px;
+    }
+
+    .cinematic-banner-text .section-label {
+      margin-bottom: 12px;
+    }
+
+    .cinematic-banner-text h2 {
+      font-size: clamp(28px, 3.5vw, 46px);
+      margin-bottom: 14px;
+    }
+
+    .cinematic-banner-text p {
+      font-size: 15px;
+      color: var(--off);
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    .cinematic-banner-stat {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .cinematic-stat-box {
+      background: rgba(0, 232, 120, 0.1);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 10px 18px;
+      text-align: center;
+    }
+
+    .cinematic-stat-num {
+      font-family: var(--condensed);
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--green);
+      line-height: 1;
+    }
+
+    .cinematic-stat-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: .15em;
+      color: var(--off);
+      text-transform: uppercase;
+      margin-top: 3px;
+    }
+
+    /* ── MARKETS ── */
+    #markets {
+      background: var(--dark);
+    }
+
+    .markets-layout {
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      gap: 72px;
+      align-items: start;
+      margin-top: 56px;
+    }
+
+    .market-card {
+      background: var(--slate);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 26px;
+      margin-bottom: 14px;
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      transition: border-color .2s, transform .2s;
+    }
+
+    .market-card:hover {
+      border-color: var(--green);
+      transform: translateX(4px);
+    }
+
+    .market-icon {
+      width: 42px;
+      height: 42px;
+      flex-shrink: 0;
+      background: var(--green-faint);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .market-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--green);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .market-info h4 {
+      font-family: var(--condensed);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+
+    .market-info p {
+      font-size: 14px;
+      color: var(--off);
+      line-height: 1.65;
+      font-weight: 300;
+    }
+
+    .markets-visual {
+      position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      margin-bottom: 18px;
+    }
+
+    .markets-visual img {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      filter: saturate(0.8) brightness(0.9);
+      transition: filter .4s ease, transform .5s ease;
+    }
+
+    .markets-visual:hover img {
+      filter: saturate(1) brightness(1);
+      transform: scale(1.02);
+    }
+
+    .markets-visual::after {
+      content: 'B2B COMMERCIAL FLEETS — CENTRAL AFRICA';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 12px 16px;
+      background: linear-gradient(transparent, rgba(8, 12, 8, 0.88));
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: .15em;
+      color: var(--green);
+    }
+
+    /* ── MAP with image background ── */
+    .region-map {
+      position: relative;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .region-map-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: saturate(0.3) brightness(0.35);
+    }
+
+    .region-map-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(8, 12, 8, 0.72);
+    }
+
+    .region-map-inner {
+      position: relative;
+      z-index: 2;
+      padding: 24px;
+      text-align: center;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--black);
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      margin-top: 56px;
+    }
+
+    .contact-info h3 {
+      font-size: 17px;
+      margin-bottom: 14px;
+      color: var(--white);
+      font-family: var(--condensed);
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .contact-info p {
+      font-size: 15px;
+      color: var(--off);
+      line-height: 1.8;
+      font-weight: 300;
+      margin-bottom: 28px;
+    }
+
+    .contact-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .contact-detail-icon {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+      background: var(--green-faint);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .contact-detail-icon svg {
+      width: 15px;
+      height: 15px;
+      stroke: var(--green);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .contact-detail-text {
+      font-size: 14px;
+      color: var(--off);
+      line-height: 1.5;
+    }
+
+    .contact-detail-text strong {
+      display: block;
+      color: var(--white);
+      font-family: var(--condensed);
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    .contact-form {
+      background: var(--dark);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 36px;
+    }
+
+    .contact-visual {
+      position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      margin-bottom: 22px;
+    }
+
+    .contact-visual img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      object-position: center center;
+      display: block;
+      filter: saturate(1.1) brightness(1.25) contrast(1.05);
+      transition: filter .4s ease, transform .5s ease;
+    }
+
+    .contact-visual:hover img {
+      filter: saturate(1.2) brightness(1.35) contrast(1.05);
+      transform: scale(1.02);
+    }
+
+    .contact-visual::after {
+      content: 'INSTITUTIONAL PARTNERSHIPS';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 12px 16px;
+      background: linear-gradient(transparent, rgba(8, 12, 8, 0.6));
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: .18em;
+      color: var(--green);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    label {
+      display: block;
+      font-family: var(--condensed);
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--off);
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea,
+    select {
+      width: 100%;
+      background: var(--slate);
+      border: 1px solid rgba(0, 232, 120, .14);
+      border-radius: 2px;
+      color: var(--white);
+      font-family: var(--body);
+      font-size: 14px;
+      padding: 10px 13px;
+      outline: none;
+      transition: border-color .2s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--green);
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #3a4c3a;
+    }
+
+    select option {
+      background: var(--slate);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 110px;
+    }
+
+    .form-submit {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--green);
+      color: var(--black);
+      font-family: var(--condensed);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      border: none;
+      padding: 13px 28px;
+      cursor: pointer;
+      border-radius: 2px;
+      width: 100%;
+      justify-content: center;
+      transition: all .2s;
+    }
+
+    .form-submit:hover {
+      background: #00ff88;
+      transform: translateY(-1px);
+    }
+
+    .form-submit svg {
+      width: 15px;
+      height: 15px;
+      flex-shrink: 0;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      border-top: 1px solid var(--border);
+      padding: 52px 5vw 36px;
+    }
+
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .footer-brand p {
+      font-size: 13px;
+      color: var(--off);
+      line-height: 1.7;
+      margin-top: 10px;
+      font-weight: 300;
+      max-width: 260px;
+    }
+
+    .footer-tagline {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--green);
+      letter-spacing: .2em;
+      margin-top: 14px;
+      text-transform: uppercase;
+    }
+
+    .footer-col h5 {
+      font-family: var(--condensed);
+      font-size: 12px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--off);
+      margin-bottom: 16px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-col ul a {
+      font-family: var(--condensed);
+      font-size: 14px;
+      letter-spacing: .04em;
+      color: #4a5c4a;
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .footer-col ul a:hover {
+      color: var(--green);
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .footer-social a {
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--off);
+      text-decoration: none;
+      transition: all .2s;
+      font-size: 13px;
+    }
+
+    .footer-social a:hover {
+      border-color: var(--green);
+      color: var(--green);
+      background: var(--green-faint);
+    }
+
+    .footer-social a svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color: #4a5c4a;
+      font-family: var(--condensed);
+      letter-spacing: .04em;
+    }
+
+    .footer-copy span {
+      color: var(--off);
+    }
+
+    .footer-cta-small {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--green-faint);
+      border: 1px solid var(--border);
+      color: var(--green);
+      font-family: var(--condensed);
+      font-size: 12px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 2px;
+      transition: all .2s;
+    }
+
+    .footer-cta-small:hover {
+      background: var(--green);
+      color: var(--black);
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:1060px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-img-panel {
+        display: none;
+      }
+
+      .overview-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .markets-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pillars-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media(max-width:768px) {
+
+      .nav-links,
+      .nav-cta {
+        display: none;
+      }
+
+      .nav-hamburger {
+        display: flex;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 68px 5vw;
+      }
+
+      .contact-form {
+        padding: 22px;
+      }
+
+      .kpi-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+      }
+
+      .cinematic-banner {
+        height: auto;
+        padding: 60px 0;
+      }
+
+      .cinematic-banner img {
+        display: none;
+      }
+
+      .cinematic-banner-overlay {
+        display: none;
+      }
+
+      .cinematic-banner-content {
+        position: relative;
+        padding: 0 6vw;
+      }
+
+      .pillar {
+        min-height: 320px;
+      }
+    }
+  </style>
+
+  <!-- SEO & Social Meta Tags -->
+  <link rel="canonical" href="https://emosaf.com/zh.html">
+  <link rel="alternate" hreflang="en" href="https://emosaf.com/">
+  <link rel="alternate" hreflang="fr" href="https://emosaf.com/fr.html">
+  <link rel="alternate" hreflang="zh" href="https://emosaf.com/zh.html">
+  <link rel="alternate" hreflang="x-default" href="https://emosaf.com/">
+  
+  <meta property="og:title" content="EMOSAF S.A. — 非洲电动出行的工业体系构建者">
+  <meta property="og:description" content="EMOSAF S.A.通过优化的半散件组装、区域关税导航和分散式太阳能基础设施，在中非推广可持续交通。">
+  <meta property="og:url" content="https://emosaf.com/zh.html">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://emosaf.com/emosaf_hero.webp">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="EMOSAF S.A. — 非洲电动出行的工业体系构建者">
+  <meta name="twitter:description" content="EMOSAF S.A.通过优化的半散件组装、区域关税导航和分散式太阳能基础设施，在中非推广可持续交通。">
+  <meta name="twitter:image" content="https://emosaf.com/emosaf_hero.webp">
+
+  <!-- JSON-LD Schema Markup -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "EMOSAF S.A.",
+    "url": "https://emosaf.com/",
+    "logo": "https://emosaf.com/emosaf_hero.webp",
+    "description": "EMOSAF S.A.通过优化的半散件组装、区域关税导航和分散式太阳能基础设施，在中非推广可持续交通。",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Yaoundé",
+      "addressCountry": "Cameroon"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "institutional@emosaf.com",
+      "contactType": "Institutional Inquiries",
+      "availableLanguage": ["English", "French", "Chinese"]
+    }
+  }
+  </script>
+  </head>
+
+<body>
+
+  <!-- SCROLL PROGRESS -->
+  <div id="scroll-progress"></div>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a href="#hero" class="nav-logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 28 28" width="26" height="26" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="14,2 26,9 26,19 14,26 2,19 2,9" stroke="#00e87a" stroke-width="1.5" fill="none"></polygon>
+          <text x="14" y="18.5" font-family="Barlow Condensed,Arial Black" font-weight="900" font-size="11" fill="#00e87a" text-anchor="middle">E</text>
+        </svg>
+      </div>
+      <span class="logo-text">EMO<span>SAF</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#overview"><span>概述</span></a></li>
+      <li><a href="#pillars"><span>基础设施</span></a></li>
+      <li><a href="#markets"><span>市场</span></a></li>
+      <li><a href="#contact"><span>联系</span></a></li>
+    </ul>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div style="display:flex;gap:3px;">
+    <a href="index.html" class="lang-btn ">EN</a>
+    <a href="fr.html" class="lang-btn ">FR</a>
+    <a href="zh.html" class="lang-btn active">中文</a>
+  </div>
+      <a href="#contact" class="nav-cta">
+        
+        
+        <span>合作门户</span>
+      </a>
+      <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#overview" onclick="closeMenu()">概述</a>
+    <a href="#pillars" onclick="closeMenu()">基础设施</a>
+    <a href="#markets" onclick="closeMenu()">市场</a>
+    <a href="#contact" onclick="closeMenu()">联系</a>
+    <div class="mobile-lang">
+    <a href="index.html" class="lang-btn ">EN</a>
+    <a href="fr.html" class="lang-btn ">FR</a>
+    <a href="zh.html" class="lang-btn active">中文</a>
+  </div>
+  </div>
+
+  <!-- HERO -->
+  <section id="hero">
+    <img src="emosaf_hero.webp" alt="EMOSAF SKD electric vehicle assembly facility interior, Kribi Port Industrial Zone, Cameroon" class="hero-bg-img" width="1920" height="1080">
+    <div class="hero-bg-overlay"></div>
+    <div class="hero-grid-bg"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+      <div>
+        <div class="hero-eyebrow">
+          
+          
+          <span>EMOSAF S.A. — 喀麦隆，中非经济共同体</span>
+        </div>
+        <h1>
+          
+          
+          <span>非洲电动<br><em>出行</em><br>工业体系<br>构建者。</span>
+        </h1>
+        <p class="hero-sub">
+          
+          
+          <span>EMOSAF S.A.通过优化的半散件组装、区域关税导航和分散式太阳能基础设施，在中非推广可持续交通。</span>
+        </p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn-primary">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+            
+            
+            <span>合作申请</span>
+          </a>
+          <a href="#overview" class="btn-ghost">
+            
+            
+            <span>执行概要 ↓</span>
+          </a>
+        </div>
+      </div>
+      <div class="hero-img-panel">
+        <img src="emosaf_hero_panel.webp" alt="Inside the EMOSAF electric vehicle SKD assembly line at Kribi Industrial Zone" width="600" height="800">
+        <div class="hero-img-panel-overlay"></div>
+        <div class="hero-panel">
+          <div class="hero-panel-header">
+            <div class="status-dot"></div>
+            
+            
+            <span>运营状态 — 实时</span>
+          </div>
+          <div class="stat-grid">
+            <div class="stat-row"><span class="stat-label">Primary Zone</span><span class="stat-value">CEMAC</span>
+            </div>
+            <div class="stat-row"><span class="stat-label">Assembly Site</span><span class="stat-value">Kribi Port
+                IZ</span></div>
+            <div class="stat-row"><span class="stat-label">Vehicle Type</span><span class="stat-value">SKD — EV</span>
+            </div>
+            <div class="stat-row"><span class="stat-label">Battery Swap</span><span class="stat-value green">3
+                min</span></div>
+            <div class="stat-row"><span class="stat-label">Energy Source</span><span class="stat-value green">Off-Grid
+                Solar</span></div>
+            <div class="stat-row"><span class="stat-label">Emissions</span><span class="stat-value green">Zero
+                Target</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker-track">
+      <div class="ticker-item"><span class="ticker-divider">◆</span>&nbsp;<span class="ticker-tag">SKD</span>&nbsp;Electric Vehicle Assembly — Kribi Industrial Zone</div>
+      <div class="ticker-item"><span class="ticker-divider">◆</span>&nbsp;<span class="ticker-tag">3
+          MIN</span>&nbsp;Battery Swapping Protocol</div>
+      <div class="ticker-item"><span class="ticker-divider">◆</span>&nbsp;<span class="ticker-tag">SOLAR</span>&nbsp;Decentralized Off-Grid Charging Infrastructure</div>
+      <div class="ticker-item"><span class="ticker-divider">◆</span>&nbsp;<span class="ticker-tag">CEMAC</span>&nbsp;Regional Tariff Optimization Framework</div>
+      <div class="ticker-item"><span class="ticker-divider">◆</span>&nbsp;<span class="ticker-tag">ZERO</span>&nbsp;Emission B2B Commercial Fleets</div>
+      <div class="ticker-item"><span class="ticker-divider">◆</span>&nbsp;<span class="ticker-tag">6
+          NATIONS</span>&nbsp;Central African Transit Electrification</div>
+      <div class="ticker-item"><span class="ticker-divider">◆</span>&nbsp;<span class="ticker-tag">EMOSAF</span>&nbsp;E-Mobility Systems of Africa</div>
+      <div class="ticker-item"><span class="ticker-divider">◆</span>&nbsp;<span class="ticker-tag">SKD</span>&nbsp;Electric Vehicle Assembly — Kribi Industrial Zone</div>
+      <div class="ticker-item"><span class="ticker-divider">◆</span>&nbsp;<span class="ticker-tag">3
+          MIN</span>&nbsp;Battery Swapping Protocol</div>
+      <div class="ticker-item"><span class="ticker-divider">◆</span>&nbsp;<span class="ticker-tag">SOLAR</span>&nbsp;Decentralized Off-Grid Charging Infrastructure</div>
+      <div class="ticker-item"><span class="ticker-divider">◆</span>&nbsp;<span class="ticker-tag">CEMAC</span>&nbsp;Regional Tariff Optimization Framework</div>
+      <div class="ticker-item"><span class="ticker-divider">◆</span>&nbsp;<span class="ticker-tag">ZERO</span>&nbsp;Emission B2B Commercial Fleets</div>
+      <div class="ticker-item"><span class="ticker-divider">◆</span>&nbsp;<span class="ticker-tag">6
+          NATIONS</span>&nbsp;Central African Transit Electrification</div>
+      <div class="ticker-item"><span class="ticker-divider">◆</span>&nbsp;<span class="ticker-tag">EMOSAF</span>&nbsp;E-Mobility Systems of Africa</div>
+    </div>
+  </div>
+
+  <!-- OVERVIEW -->
+  <section id="overview">
+    <div class="section-inner">
+      <div class="section-label">
+        
+        
+        <span>执行概述</span>
+      </div>
+      <h2>
+        
+        
+        <span>重新定义大陆级<em>物流</em></span>
+      </h2>
+      <div class="overview-grid fade-up">
+        <div class="overview-text">
+          <div class="overview-image-wrap">
+            <img src="emosaf_overview.webp" alt="Aerial view of Kribi deep-water port and adjacent industrial zone at twilight, Cameroon — EMOSAF's primary assembly site" loading="lazy" width="800" height="500">
+          </div>
+          <p>
+            
+            
+            <span>EMOSAF
+              S.A.运营于<strong>全球工业制造能力</strong>与本地化执行的交汇点。通过利用中非经济共同体框架，我们绕过资本密集型进口体系，在本地组装半散件(SKD)电动汽车。</span>
+          </p>
+          <p>
+            
+            
+            <span>我们创造<strong>高价值技术就业岗位</strong>，保护车队运营利润，使区域交通免受全球燃料价格波动的影响，建立弹性的非洲自主清洁出行基础设施。</span>
+          </p>
+        </div>
+        <div>
+          <div class="kpi-grid">
+            <div class="kpi-cell">
+              <div class="kpi-num" data-countup="3" data-suffix=" min">3 min</div>
+              <div class="kpi-desc"><span>换电时间</span></div>
+            </div>
+            <div class="kpi-cell">
+              <div class="kpi-num" data-countup="0" data-suffix="%">0%</div>
+              <div class="kpi-desc"><span>排放目标</span></div>
+            </div>
+            <div class="kpi-cell">
+              <div class="kpi-num" data-countup="6" data-suffix="+">6+</div>
+              <div class="kpi-desc"><span>成员国</span></div>
+            </div>
+            <div class="kpi-cell">
+              <div class="kpi-num">SKD</div>
+              <div class="kpi-desc"><span>本地组装</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PILLARS -->
+  <section id="pillars">
+    <div class="section-inner">
+      <div style="margin-bottom:52px;">
+        <div class="section-label">
+          
+          
+          <span>三大基础设施支柱</span>
+        </div>
+        <h2>
+          
+          
+          <span>为<em>规模</em>而建。为非洲而设计。</span>
+        </h2>
+      </div>
+      <div class="pillars-grid fade-up">
+        <div class="pillar">
+          <img src="emosaf_pillar1.webp" alt="Inside EMOSAF's flexible SKD electric vehicle assembly line at Kribi Port Industrial Zone, Cameroon" class="pillar-img" loading="lazy" width="600" height="800">
+          <div class="pillar-img-overlay"></div>
+          <div class="pillar-content">
+            <div class="pillar-num">01 /</div>
+            <div class="pillar-icon">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <rect x="6" y="28" width="36" height="14" rx="2"></rect>
+                <path d="M6 28l6-12h24l6 12"></path>
+                <circle cx="14" cy="42" r="4" fill="none"></circle>
+                <circle cx="34" cy="42" r="4" fill="none"></circle>
+                <path d="M18 42h12"></path>
+                <path d="M21 20h6"></path>
+              </svg>
+            </div>
+            <h3>
+              
+              
+              <span>SKD本地组装</span>
+            </h3>
+            <p>
+              
+              
+              <span>在克里比港工业区内建立的需求同步灵活装配线，专门针对区域快速车辆部署进行优化。</span>
+            </p>
+            <div class="pillar-bar"></div>
+          </div>
+        </div>
+        <div class="pillar">
+          <img src="emosaf_battery.webp" alt="Futuristic battery swapping station at an urban Central African transit hub with green indicator lights" class="pillar-img" loading="lazy" width="600" height="800">
+          <div class="pillar-img-overlay"></div>
+          <div class="pillar-content">
+            <div class="pillar-num">02 /</div>
+            <div class="pillar-icon">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <rect x="10" y="18" width="28" height="18" rx="3"></rect>
+                <path d="M18 18v-4a6 6 0 0 1 12 0v4"></path>
+                <path d="M21 27h6"></path>
+                <circle cx="24" cy="27" r="3"></circle>
+                <path d="M5 27h5M38 27h5"></path>
+              </svg>
+            </div>
+            <h3>
+              
+              
+              <span>电池换换网络</span>
+            </h3>
+            <p>
+              
+              
+              <span>在主要城市交通枢纽提供快速3分钟闭环电池更换服务，消除续航焦虑，最大化商业车队运营时间。</span>
+            </p>
+            <div class="pillar-bar"></div>
+          </div>
+        </div>
+        <div class="pillar">
+          <img src="emosaf_solar.webp" alt="Aerial view of off-grid solar panel arrays powering EMOSAF electric vehicle charging stations across Central African landscape at dusk" class="pillar-img" loading="lazy" width="600" height="800">
+          <div class="pillar-img-overlay"></div>
+          <div class="pillar-content">
+            <div class="pillar-num">03 /</div>
+            <div class="pillar-icon">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="24" cy="12" r="6"></circle>
+                <path d="M24 18v6"></path>
+                <path d="M8 22l8 4M40 22l-8 4"></path>
+                <rect x="14" y="28" width="20" height="12" rx="2"></rect>
+                <path d="M20 28v-3l4-3 4 3v3"></path>
+                <path d="M21 40v4M27 40v4"></path>
+              </svg>
+            </div>
+            <h3>
+              
+              
+              <span>分散式太阳能中心</span>
+            </h3>
+            <p>
+              
+              
+              <span>离网太阳能充电阵列，使我们的运营完全独立于当地电网的不稳定性和停电问题。</span>
+            </p>
+            <div class="pillar-bar"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CINEMATIC BANNER -->
+  <div class="cinematic-banner">
+    <img src="emosaf_cinematic_banner.webp" alt="Vast solar energy infrastructure powering EMOSAF's decentralized clean mobility network across Central Africa" width="1920" height="600">
+    <div class="cinematic-banner-overlay"></div>
+    <div class="cinematic-banner-content">
+      <div class="cinematic-banner-text fade-up">
+        <div class="section-label"><span>清洁能源独立</span></div>
+        <h2><span>由<em>太阳</em>驱动。<br>非洲自主拥有。</span></h2>
+        <p><span>我们的离网太阳能基础设施消除了对不稳定国家电网的依赖，为中非经共体地区的每个装配中心和充电站提供可靠的零成本能源。</span></p>
+        <div class="cinematic-banner-stat">
+          <div class="cinematic-stat-box">
+            <div class="cinematic-stat-num">100%</div>
+            <div class="cinematic-stat-label">Off-Grid</div>
+          </div>
+          <div class="cinematic-stat-box">
+            <div class="cinematic-stat-num">₀</div>
+            <div class="cinematic-stat-label">Grid Dependency</div>
+          </div>
+          <div class="cinematic-stat-box">
+            <div class="cinematic-stat-num">24/7</div>
+            <div class="cinematic-stat-label">Uptime</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MARKETS -->
+  <section id="markets">
+    <div class="section-inner">
+      <div class="section-label">
+        
+        
+        <span>战略市场聚焦</span>
+      </div>
+      <h2>
+        
+        
+        <span>目标市场：<em>B2B商业车队</em></span>
+      </h2>
+      <div class="markets-layout fade-up">
+        <div>
+          <div class="markets-visual">
+            <img src="emosaf_fleet.webp" alt="Fleet of EMOSAF electric buses and cargo vans operating in a modern Central African city at golden hour" loading="lazy" width="800" height="500">
+          </div>
+          <p class="section-desc" style="margin-bottom:28px;">
+            
+            
+            <span>我们绕过波动的零售消费市场，专注于具有保证量和长期车队合同的高产值结构性行业。</span>
+          </p>
+          <div class="market-card">
+            <div class="market-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M3 17h18M5 17V9l7-5 7 5v8"></path>
+                <path d="M9 17v-5h6v5"></path>
+              </svg>
+            </div>
+            <div class="market-info">
+              <h4><span>城市交通联合组织</span></h4>
+              <p><span>将高维护成本的城市出租车网络转变为中非各城市超低成本的电动微出行运营。</span></p>
+            </div>
+          </div>
+          <div class="market-card">
+            <div class="market-icon">
+              <svg viewBox="0 0 24 24">
+                <rect x="1" y="3" width="15" height="13" rx="2"></rect>
+                <path d="M16 8h4l3 3v5h-7V8z"></path>
+                <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                <circle cx="18.5" cy="18.5" r="2.5"></circle>
+              </svg>
+            </div>
+            <div class="market-info">
+              <h4><span>最后一公里物流</span></h4>
+              <p><span>为配送、电子商务和企业货运车队提供零排放、高容量的电动厢式货车。</span></p>
+            </div>
+          </div>
+        </div>
+        <div class="region-map">
+          <img src="emosaf_map_bg.webp" alt="Map background — Kribi Port area, CEMAC region" class="region-map-bg" loading="lazy" width="800" height="600">
+          <div class="region-map-overlay"></div>
+          <div class="region-map-inner">
+            <div class="section-label" style="justify-content:center;margin-bottom:18px;">
+              
+              
+              <span>中非经共体运营区域</span>
+            </div>
+            <svg viewBox="0 0 380 350" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;">
+              <rect x="140" y="60" width="90" height="100" rx="4" fill="#0e2018" stroke="#00e87a" stroke-width="1.5"></rect>
+              <text x="185" y="98" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-size="11" font-weight="700" fill="#00e87a" letter-spacing="1">CAMEROON</text>
+              <text x="185" y="116" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-size="9" fill="#a8b4a4" letter-spacing="0.5">HQ + ASSEMBLY</text>
+              <circle cx="185" cy="130" r="4" fill="#00e87a"></circle>
+              <rect x="240" y="75" width="70" height="70" rx="4" fill="#1e2a1e" stroke="#00e87a" stroke-width="0.8"></rect>
+              <text x="275" y="112" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-size="10" fill="#a8b4a4" letter-spacing="0.5">C.A.R.</text>
+              <rect x="180" y="40" width="60" height="50" rx="4" fill="#1e2a1e" stroke="#00e87a" stroke-width="0.8"></rect>
+              <text x="210" y="70" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-size="10" fill="#a8b4a4" letter-spacing="0.5">CHAD</text>
+              <rect x="140" y="170" width="70" height="70" rx="4" fill="#1e2a1e" stroke="#00e87a" stroke-width="0.8"></rect>
+              <text x="175" y="210" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-size="10" fill="#a8b4a4" letter-spacing="0.5">CONGO</text>
+              <rect x="60" y="140" width="70" height="80" rx="4" fill="#1e2a1e" stroke="#00e87a" stroke-width="0.8"></rect>
+              <text x="95" y="183" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-size="10" fill="#a8b4a4" letter-spacing="0.5">GABON</text>
+              <rect x="60" y="90" width="70" height="45" rx="4" fill="#1e2a1e" stroke="#00e87a" stroke-width="0.8"></rect>
+              <text x="95" y="118" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-size="9" fill="#a8b4a4" letter-spacing="0.5">EQ. GUINEA</text>
+              <rect x="220" y="170" width="100" height="110" rx="4" fill="#141c14" stroke="rgba(0,232,120,0.2)" stroke-width="0.5"></rect>
+              <text x="270" y="230" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-size="10" fill="#3a4c3a" letter-spacing="0.5">DRC</text>
+              <line x1="130" y1="130" x2="95" y2="155" stroke="#00e87a" stroke-width="0.6" stroke-dasharray="4,3" opacity="0.5"></line>
+              <line x1="185" y1="160" x2="175" y2="170" stroke="#00e87a" stroke-width="0.6" stroke-dasharray="4,3" opacity="0.5"></line>
+              <line x1="215" y1="115" x2="240" y2="110" stroke="#00e87a" stroke-width="0.6" stroke-dasharray="4,3" opacity="0.5"></line>
+              <circle cx="155" cy="148" r="6" fill="none" stroke="#00e87a" stroke-width="1.5"></circle>
+              <circle cx="155" cy="148" r="3" fill="#00e87a"></circle>
+              <line x1="155" y1="142" x2="155" y2="128" stroke="#00e87a" stroke-width="0.8"></line>
+              <text x="162" y="126" font-family="Barlow Condensed,sans-serif" font-size="9" fill="#00e87a" font-weight="700" letter-spacing="1">KRIBI PORT IZ</text>
+              <rect x="20" y="290" width="12" height="12" rx="1" fill="#0e2018" stroke="#00e87a" stroke-width="1.5"></rect>
+              <text x="38" y="301" font-family="Barlow Condensed,sans-serif" font-size="10" fill="#a8b4a4" letter-spacing="0.5">CEMAC Active Zone</text>
+              <circle cx="26" cy="315" r="4" fill="none" stroke="#00e87a" stroke-width="1.5"></circle>
+              <circle cx="26" cy="315" r="2" fill="#00e87a"></circle>
+              <text x="38" y="319" font-family="Barlow Condensed,sans-serif" font-size="10" fill="#a8b4a4" letter-spacing="0.5">Assembly / Hub Site</text>
+              <text x="190" y="342" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-size="8" fill="#3a4c3a" letter-spacing="0.5">SCHEMATIC MAP — ILLUSTRATIVE PURPOSES ONLY</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-inner">
+      <div class="section-label">
+        
+        
+        <span>机构询问</span>
+      </div>
+      <h2>
+        
+        
+        <span><em>执行层</em>门户</span>
+      </h2>
+      <div class="contact-grid fade-up">
+        <div class="contact-info">
+          <div class="contact-visual">
+            <img src="emosaf_contact.webp" alt="African and international business executives in a bright boardroom reviewing EMOSAF e-mobility partnership proposals" loading="lazy" width="800" height="500">
+          </div>
+          <h3><span>联系管理团队</span></h3>
+          <p><span>我们欢迎来自机构投资者、国际汽车制造商、车队运营商以及中非经共体地区战略政府合作伙伴的询问。</span></p>
+          <div class="contact-detail">
+            <div class="contact-detail-icon"><svg viewBox="0 0 24 24">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg></div>
+            <div class="contact-detail-text">
+              <strong><span>总部</span></strong>
+              Yaoundé, Cameroon — CEMAC Region
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon"><svg viewBox="0 0 24 24">
+                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+              </svg></div>
+            <div class="contact-detail-text">
+              <strong><span>企业邮箱</span></strong>
+              institutional@emosaf.com
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon"><svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg></div>
+            <div class="contact-detail-text">
+              <strong><span>响应时间</span></strong>
+              <span>48工作小时内</span>
+            </div>
+          </div>
+          <div style="margin-top:28px;padding:18px;border:1px solid var(--border);border-radius:3px;background:var(--green-faint);">
+            <div style="font-family:var(--mono);font-size:10px;color:var(--green);letter-spacing:.15em;margin-bottom:8px;">
+              ▸ CEMAC FRAMEWORK</div>
+            <p style="font-size:13px;color:var(--off);line-height:1.7;font-weight:300;">
+              
+              
+              <span>EMOSAF S.A.在中非经济共同体框架下运营，为6个中非成员国提供战略关税优势和跨境市场准入。</span>
+            </p>
+          </div>
+        </div>
+        <div class="contact-form">
+          <div style="font-family:var(--mono);font-size:10px;color:var(--green);letter-spacing:.2em;margin-bottom:22px;padding-bottom:14px;border-bottom:1px solid var(--border);">
+            ▸ <span>机构询问表格</span>
+          </div>
+          <form onsubmit="handleSubmit(event)">
+            <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+            <div class="form-row">
+              <div class="form-group">
+                <label><span>全名</span></label>
+                <input type="text" name="name" placeholder="Dr. Jean Mouamfon" required="">
+              </div>
+              <div class="form-group">
+                <label><span>职位</span></label>
+                <input type="text" name="title" placeholder="CEO / Director" required="">
+              </div>
+            </div>
+            <div class="form-group">
+              <label><span>公司/机构</span></label>
+              <input type="text" name="company" placeholder="SGMW International / BDEAC" required="">
+            </div>
+            <div class="form-group">
+              <label><span>电子邮件</span></label>
+              <input type="email" name="email" placeholder="executive@company.com" required="">
+            </div>
+            <div class="form-group">
+              <label><span>询问类型</span></label>
+              <select name="type">
+                <option value="manufacturing">Manufacturing Partnership</option>
+                <option value="investment">Institutional Investment</option>
+                <option value="fleet">Fleet Procurement</option>
+                <option value="government">Government / Regulatory</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label><span>留言</span></label>
+              <textarea name="message" placeholder="Describe your institutional inquiry or partnership proposal..."></textarea>
+            </div>
+            <button type="submit" class="form-submit">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+              
+              
+              <span>提交机构询问</span>
+            </button>
+          </form>
+          <div id="form-success" style="display:none;margin-top:18px;padding:14px;background:var(--green-faint);border:1px solid var(--green);border-radius:3px;color:var(--green);font-family:var(--condensed);font-size:13px;letter-spacing:.05em;">
+            ✓ INQUIRY RECEIVED — OUR EXECUTIVE TEAM WILL CONTACT YOU WITHIN 48 HOURS.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="#hero" class="nav-logo" style="margin-bottom:12px;display:inline-flex;">
+            <div class="logo-mark" style="width:30px;height:30px;">
+              <svg viewBox="0 0 28 28" width="22" height="22" fill="none">
+                <polygon points="14,2 26,9 26,19 14,26 2,19 2,9" stroke="#00e87a" stroke-width="1.5" fill="none"></polygon>
+                <text x="14" y="18.5" font-family="Barlow Condensed,Arial Black" font-weight="900" font-size="11" fill="#00e87a" text-anchor="middle">E</text>
+              </svg>
+            </div>
+            <span class="logo-text" style="font-size:18px;">EMO<span>SAF</span></span>
+          </a>
+          <p>Industrial architecture for Africa's electric mobility transition. Assembled locally. Scaled regionally.
+          </p>
+          <div class="footer-tagline">▸ E-MOBILITY SYSTEMS OF AFRICA</div>
+          <div class="footer-social" style="margin-top:18px;">
+            <a href="#" aria-label="LinkedIn" title="LinkedIn">
+              <svg viewBox="0 0 24 24">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
+            </a>
+            <a href="#" aria-label="X / Twitter" title="X / Twitter">
+              <svg viewBox="0 0 24 24">
+                <path d="M4 4l16 16M20 4L4 20"></path>
+              </svg>
+            </a>
+            <a href="#" aria-label="Email" title="Email us">
+              <svg viewBox="0 0 24 24">
+                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h5>Navigation</h5>
+          <ul>
+            <li><a href="#overview">Executive Overview</a></li>
+            <li><a href="#pillars">Infrastructure Pillars</a></li>
+            <li><a href="#markets">Target Markets</a></li>
+            <li><a href="#contact">Partner Portal</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <ul>
+            <li><a href="mailto:institutional@emosaf.com">institutional@emosaf.com</a></li>
+            <li><a href="#contact">Partner Inquiry</a></li>
+            <li><a href="#contact">Investment Relations</a></li>
+            <li><a href="#contact">Fleet Procurement</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2026 EMOSAF S.A. All Rights Reserved. <span>Headquartered in Yaoundé, Cameroon — CEMAC
+            Region.</span></p>
+        <a href="#contact" class="footer-cta-small">
+          <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+          </svg>
+          Become a Partner
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* ── NAV ── */
+    function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+    function closeMenu() { document.getElementById('mobileMenu').classList.remove('open'); }
+
+    /* ── SCROLL PROGRESS ── */
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      document.getElementById('scroll-progress').style.width = (scrolled / total * 100) + '%';
+      document.getElementById('navbar').style.background = scrolled > 80 ? 'rgba(8,12,8,0.98)' : 'rgba(8,12,8,0.92)';
+    });
+
+    /* ── FADE-UP ── */
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+    /* ── KPI COUNT-UP ── */
+    function animateCountUp(el) {
+      const target = parseInt(el.dataset.countup, 10);
+      const suffix = el.dataset.suffix || '';
+      if (isNaN(target)) return;
+      let start = 0;
+      const duration = 1400;
+      const step = duration / Math.max(target, 1);
+      el.textContent = '0' + suffix;
+      const timer = setInterval(() => {
+        start = Math.min(start + 1, target);
+        el.textContent = start + suffix;
+        if (start >= target) clearInterval(timer);
+      }, step);
+    }
+    const kpiObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          animateCountUp(e.target);
+          kpiObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.kpi-num[data-countup]').forEach(el => kpiObs.observe(el));
+
+    /* ── FORM SUBMIT ── */
+    function handleSubmit(e) {
+      e.preventDefault();
+      const form = e.target;
+      const formData = new FormData(form);
+      const object = Object.fromEntries(formData);
+      const json = JSON.stringify(object);
+      
+      const btn = form.querySelector('.form-submit');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = 'SUBMITTING...';
+      
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: json
+      })
+      .then(async (response) => {
+        if (response.status == 200) {
+          btn.innerHTML = '✓ SUBMITTED';
+          btn.style.background = '#00c264';
+          document.getElementById('form-success').style.display = 'block';
+          form.style.opacity = '0.5';
+          form.style.pointerEvents = 'none';
+        } else {
+          btn.innerHTML = 'ERROR - TRY AGAIN';
+          setTimeout(() => btn.innerHTML = originalText, 3000);
+        }
+      })
+      .catch(error => {
+        console.log(error);
+        btn.innerHTML = 'ERROR - TRY AGAIN';
+        setTimeout(() => btn.innerHTML = originalText, 3000);
+      });
+    }
+
+    
+  </script>
+
+
+</body></html>
